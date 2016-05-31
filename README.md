@@ -1,3 +1,14 @@
+#Перевод и адаптпция темы Elegant для генератора статических блогов Pelican.
+
+Перевод выполнен для себя. Вы можете форкнуть репозиторий и изменять его как Вам угодно.
+
+Перевод выполнен на русский язык.
+
+Буду благодарен за поправки в комментариях.
+
+Спасибо.
+
+#Оригинальное README
 Please visit [Elegant - a theme for Pelican](http://oncrashreboot.com/pelican-elegant) at my blog for detailed features and documentation.
 
 Elegant offers several unique features including search, live filter, collapsible comments, Mailchimp, custom 404 page, etc. It is a minimal, and stylish theme that looks amazing across all screen resolutions and devices.  
