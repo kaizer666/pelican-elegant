@@ -222,17 +222,17 @@ http://www.tipue.com/search
                          {
                               if (show_replace == 1)
                               {
-                                   out += '<div id="tipue_search_warning_head">Showing results for ' + d + '</div>';
-                                   out += '<div id="tipue_search_warning">Search for <a href="javascript:void(0)" id="tipue_search_replaced">' + d_r + '</a></div>'; 
+                                   out += '<div id="tipue_search_warning_head">Отображение результатов для ' + d + '</div>';
+                                   out += '<div id="tipue_search_warning">Поиск <a href="javascript:void(0)" id="tipue_search_replaced">' + d_r + '</a></div>'; 
                               }
                               if (c == 1)
                               {
-                                   out += '<div id="tipue_search_results_count">1 result</div>';
+                                   out += '<div id="tipue_search_results_count">Резултатов: 1</div>';
                               }
                               else
                               {
                                    c_c = c.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                   out += '<div id="tipue_search_results_count">' + c_c + ' results</div>';
+                                   out += '<div id="tipue_search_results_count">Результатов: ' + c_c + '</div>';
                               }
                               
                               found.sort();
@@ -333,21 +333,21 @@ http://www.tipue.com/search
                          }
                          else
                          {
-                              out += '<div id="tipue_search_warning_head">Nothing found</div>'; 
+                              out += '<div id="tipue_search_warning_head">Упс. Ничего не найдено :-(</div>'; 
                          }
                     }
                     else
                     {
                          if (show_stop)
                          {
-                              out += '<div id="tipue_search_warning_head">Nothing found</div><div id="tipue_search_warning">Common words are largely ignored</div>';     
+                              out += '<div id="tipue_search_warning_head">Упс. Ничего не найдено :-(</div><div id="tipue_search_warning">Общие слова в основном игнорируются</div>';     
                          }
                          else
                          {
-                              out += '<div id="tipue_search_warning_head">Search too short</div>';
+                              out += '<div id="tipue_search_warning_head">Запрос слишком короткий</div>';
                               if (set.minimumLength == 1)
                               {
-                                   out += '<div id="tipue_search_warning">Should be one character or more</div>';
+                                   out += '<div id="tipue_search_warning">Должен быть один символ или более</div>';
                               }
                               else
                               {
@@ -380,4 +380,8 @@ http://www.tipue.com/search
 
 
 
+
+$('article.content').anchorific({
+        anchorClass: null, anchorText: null, spy: true, position: null, anchor: null,
+    });
 
