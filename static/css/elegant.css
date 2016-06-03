@@ -102,11 +102,11 @@ table {
 td {
     vertical-align: top;
 }
-@media (max-width:979px) {
+/*@media (max-width:979px) {
     .linenos {
         display:none !important;
     }
-}
+}*/
 .linenos {
     width: 30px;
 }
