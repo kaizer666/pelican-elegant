@@ -391,6 +391,12 @@ ul.list-articles-category li time {
 }
 a.category-link {
     color: #333;
+    background: #EEE;
+    border-radius: 3px;
+    color: #222;
+    margin: 2px;
+    padding: 3px 6px;
+    text-decoration: none;
 }
 a.category-link:hover {
     text-decoration: none;

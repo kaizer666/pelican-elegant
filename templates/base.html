@@ -65,14 +65,22 @@
                         <ul class="nav pull-right top-menu">
                             <li {% if page_name == 'index' %} class="active"{% endif %}><a href="{{ SITEURL }}">Главная</a></li>
                             {% if DISPLAY_PAGES_ON_MENU %}
-                            {% for p in pages %}
-                            <li {% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
-                            {% endfor %}
+                                {% for p in pages %}
+                                    <li {% if p == page %} class="active"{% endif %}><a href="{{ SITEURL }}/{{ p.url }}">{{ p.title }}</a></li>
+                                {% endfor %}
                             {% endif %}
-                            <li {% if page_name == 'categories' %} class="active"{% endif %}><a href="{{ SITEURL }}/categories.html">Категории</a></li>
-                            <li {% if page_name == 'tags' %} class="active"{% endif %}><a href="{{ SITEURL }}/tags.html">Теги</a></li>
-                            <li {% if page_name == 'archives' %} class="active"{% endif %}><a href="{{ SITEURL }}/archives.html">Архив</a></li>
-                            <li><form class="navbar-search" action="{{ SITEURL }}/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Поиск" name="q" id="tipue_search_input"></form></li>
+                            <li {% if page_name == 'categories' %} class="active"{% endif %}>
+                                <a href="{{ SITEURL }}/categories.html">Категории</a>
+                            </li>
+                            <li {% if page_name == 'tags' %} class="active"{% endif %}>
+                                <a href="{{ SITEURL }}/tags.html">Теги</a>
+                            </li>
+                            <li {% if page_name == 'archives' %} class="active"{% endif %}>
+                                <a href="{{ SITEURL }}/archives.html">Все записи</a>
+                            </li>
+                            <li>
+                                <form class="navbar-search" action="{{ SITEURL }}/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Поиск" name="q" id="tipue_search_input"></form>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -92,7 +100,7 @@
     </div>
         {% include '_includes/footer.html' %}
         {% block script %}
-        <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//code.jquery.com/jquery.min.js"></script>
         <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
         <script>
             function validateForm(query)
@@ -102,6 +110,82 @@
         </script>
         {% endblock script %}
         {% include '_includes/stat_counter.html' %}
+
+        <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-574fe9be30af38d0"></script>
+
+<script id="dsq-count-scr" src="//kaizer-666.disqus.com/count.js" async></script>
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        div = $(".toc");
+        li = div.children().children();
+        li.each(function(num, el) {
+            if ($(el).children().length == 2) {
+                a = $(el).children()[0]; 
+                $(a).addClass("topLink");
+                li2 = $($(el).children()[1]).children();
+                li2.each(function(num,el){
+                    a = $(el).children(); 
+                    a.addClass("topLink");
+                })
+            } else {
+                a = $(el).children(); 
+                a.addClass("topLink");
+            }
+        });
+
+        $("a.topLink").click(function() {
+          $("html, body").animate({
+             scrollTop: $($(this).attr("href")).offset().top + "px"
+          }, {
+             duration: 500,
+             easing: "swing"
+          });
+          return false;
+       });
+    });
+</script>
+
+{{ ace_editor }}
+
+<script type="text/javascript" src="/js/fuckadblock.js"></script>
+<script type="text/javascript">
+    // Function called if AdBlock is not detected
+function adBlockNotDetected() {
+    $('#ab').hide();
+    // $('#ab').show();
+    // document.getElementById("ab").innerHTML = "<h2 style='color:blue;'>Спасибо, что не используете AdBlock</h2><hr/>"
+}
+// Function called if AdBlock is detected
+function adBlockDetected() {
+    $("#ab").show();
+    document.getElementById("ab").innerHTML = "<h2 style='color:red;'>Пожалуйста, отключите AdBlock или добавьте мой блог в исключения</h2><hr/>"
+}
+
+// Recommended audit because AdBlock lock the file 'fuckadblock.js' 
+// If the file is not called, the variable does not exist 'fuckAdBlock'
+// This means that AdBlock is present
+if(typeof fuckAdBlock === 'undefined') {
+    adBlockDetected();
+} else {
+    fuckAdBlock.onDetected(adBlockDetected);
+    fuckAdBlock.onNotDetected(adBlockNotDetected);
+    // // and|or
+    // fuckAdBlock.on(true, adBlockDetected);
+    // fuckAdBlock.on(false, adBlockNotDetected);
+    // // and|or
+    // fuckAdBlock.on(true, adBlockDetected).onNotDetected(adBlockNotDetected);
+}
+
+// Change the options
+fuckAdBlock.setOption('checkOnLoad', true);
+// and|or
+fuckAdBlock.setOption({
+    debug: false,
+    checkOnLoad: true,
+    resetOnEnd: false
+});
+</script>
     </body>
     <!-- Theme: Elegant built for Pelican
     License : http://oncrashreboot.com/pelican-elegant -->
