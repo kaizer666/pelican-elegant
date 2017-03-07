@@ -53,7 +53,7 @@
             <div class="row-fluid">
             <div class="{{css_class}}">
                 <header>
-                <h1 id="recent-posts">Последние записи <a id="allposts" href="{{ SITEURL }}/archives.html">Все записи</a></h1>
+                <h1 id="recent-posts">Последние записи <a id="allposts" href="{{ ARCHIVES_URL }}">Все записи</a></h1>
                 </header>
             <div class="recent-posts">
                 {% for article in articles %}
@@ -63,7 +63,7 @@
                     <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }} {%if article.subtitle %} <small> {{ article.subtitle }} </small> {% endif %} </a> {% if article.pin %}<i class="fa fa-thumb-tack" aria-hidden="true"></i>{% endif %}
                     <section>
                         Категория: 
-                    <a href="{{ SITEURL }}/categories.html#{{ article.category.slug }}-ref">{{ article.category }}</a>
+                    <a href="{{ CATEGORIES_URL }}#{{ article.category.slug }}-ref">{{ article.category }}</a>
                     <div class="recent-posts-time">
                     <time pubdate="pubdate" datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%d.%m.%Y') }}</time>
                     </div>

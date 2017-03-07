@@ -38,12 +38,12 @@ Full archives of {{ SITENAME|striptags|e }} blog.
             {% for article in dates %}
                 {% set next_year = 0 %}
                 {% set year = article.date.strftime('%Y') %}
-                {% if not loop.last %}
-                    {% set next = loop.index0 + 1 %}
-                    {% set next_article = dates[next] %}
-                    {% set next_year = next_article.date.strftime('%Y') %}
+                {% if not loop.first %}
+                    {% set prev = loop.index0 - 1 %}
+                    {% set prev_article = dates[prev] %}
+                    {% set prev_year = prev_article.date.strftime('%Y') %}
                 {% endif %}
-                {% if next_year != year %}
+                {% if prev_year != year %}
                     <h2 id="{{year }}"><a href="#{{year}}">{{ year }}</a></h2>
                 {% endif %}
                 {% set next_year = 0 %}
@@ -58,7 +58,7 @@ Full archives of {{ SITENAME|striptags|e }} blog.
                     <article>
                 {% endif %}
                 <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }} {%if article.subtitle %} <small> {{ article.subtitle }} </small> {% endif %} </a>
-                <time pubdate="pubdate" datetime="{{ article.date.isoformat() }}">{{ article.locale_date }}</time>
+                <time pubdate="pubdate" datetime="{{ article.date.isoformat() }}">{{ article.date.strftime('%d %B %Y') }}</time>
                 </article>
             {% endfor %}
         </div>
