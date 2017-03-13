@@ -15,6 +15,40 @@
         <meta name="copyright" content="{{ AUTHOR }}" />
         {% endif %}
 
+
+        <!-- OpenGraph protocol tags: http://ogp.me/ -->
+        <!-- originally adopted to be used for: https://blog.kmonsoor.com -->
+        <meta property="og:site_name" content="{{ SITENAME }}" />
+        <meta property="og:type" content="article" />
+        {% if article and article.title %}    
+            <meta property="og:title" content="{{ article.title }} -- {{ TAGLINE }}" />
+            <meta property="og:url" content="{{ SITEURL }}/{{ article.url }}" />
+        {% endif%}
+        {% if article and article.summary %}
+            <meta property="og:description" content="{{ article.summary|striptags }}" />
+        {% else %}
+            <meta name="og:description" content="{{ SITE_SUMMARY }}"/>
+        {% endif%}
+        {% if article and article.date %}
+            <meta property="article:published_time" content="{{ article.date }}" />
+        {% endif%}
+        {% if article and article.modified %}
+            <meta property="article:modified_time" content="{{ article.modified }}" />
+        {% endif%}
+        <!-- End of OpenGraph protocol tags -->
+
+        {% if TWITTER_USERNAME %}
+            <meta name="twitter:site" content="@{{ TWITTER_USERNAME }}" />
+            <meta name="twitter:creator" content="@{{ TWITTER_USERNAME }}" />
+        {% endif%}
+        <meta name="twitter:image" content="/images/kostili.png" />
+        {% if article and article.summary %}
+            <meta name="twitter:card" content="{{ article.summary|striptags }}" />
+        {% else %}
+            <meta name="twitter:card" content="{{ SITE_SUMMARY }}"/>
+        {% endif%}
+
+
         {% from '_includes/_defaults.html' import SITE_DESCRIPTION with context %}
         {% if SITE_DESCRIPTION %}
         <meta name="description" content="{% block head_description %}{{ SITE_DESCRIPTION|e }}{% endblock head_description %}" />
@@ -24,14 +58,14 @@
         {% if GOOGLE_PLUS_PROFILE_URL %}
         <link rel="author" href={{GOOGLE_PLUS_PROFILE_URL}} />
         {% endif %}
-        {% from '_includes/_defaults.html' import TWITTER_USERNAME with context %}
-        {%if TWITTER_USERNAME %}
-        <meta name="twitter:creator" content="@{{TWITTER_USERNAME}}">
-        {% endif %}
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
         {% endblock meta_tags_in_head %}
-        <title>{% block title %}{{ SITENAME|striptags|e }}{% endblock title %}</title>
+        {% if article %}
+            <title>{{ article.title }} -- {{ SITENAME|striptags }}</title>
+        {% else %}
+            <title>{{ SITENAME|striptags|e }}</title>
+        {% endif%}
         {% block head_links %}
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -43,6 +77,9 @@
         <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/elegant.css" media="screen">
         <link rel="stylesheet" type="text/css" href="{{ SITEURL }}/theme/css/custom.css" media="screen">
         {% endif %}
+        {% if article %}
+            <link rel="canonical" href="{{ SITEURL }}/{{ article.url }}"/>
+        {% endif%}
         {% endblock head_links %}
         {% include '_includes/favicon_links.html' %}
         {% block feed_links %}
@@ -112,9 +149,9 @@
         {% include '_includes/stat_counter.html' %}
 
         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-574fe9be30af38d0"></script>
-
-<script id="dsq-count-scr" src="//kaizer-666.disqus.com/count.js" async></script>
-
+{% if DISQUS_SITENAME and SITEURL %}
+    <script id="dsq-count-scr" src="//kaizer-666.disqus.com/count.js" async></script>
+{% endif %}
 <script type="text/javascript">
     $( document ).ready(function() {
         div = $(".toc");
@@ -161,20 +198,11 @@ function adBlockDetected() {
     $("#ab").show();
     document.getElementById("ab").innerHTML = "<h2 style='color:red;'>Пожалуйста, отключите AdBlock или добавьте мой блог в исключения</h2><hr/>"
 }
-
-// Recommended audit because AdBlock lock the file 'fuckadblock.js' 
-// If the file is not called, the variable does not exist 'fuckAdBlock'
-// This means that AdBlock is present
 if(typeof fuckAdBlock === 'undefined') {
     adBlockDetected();
 } else {
     fuckAdBlock.onDetected(adBlockDetected);
     fuckAdBlock.onNotDetected(adBlockNotDetected);
-    // // and|or
-    // fuckAdBlock.on(true, adBlockDetected);
-    // fuckAdBlock.on(false, adBlockNotDetected);
-    // // and|or
-    // fuckAdBlock.on(true, adBlockDetected).onNotDetected(adBlockNotDetected);
 }
 
 // Change the options
@@ -202,6 +230,74 @@ fuckAdBlock.setOption({
             return false;
         });
     });
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "KaizeR",
+  "url": "https://blog.kai-zer.ru",
+  "contactPoint": [{
+    "@type": "Контакты",
+    "vk": "https://vk.com/id42002307",
+    "contactType": "customer service"
+  }]
+}
+</script>
+ <!-- Add mousewheel plugin (this is optional) -->
+<!-- <script type="text/javascript" src="/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script> -->
+
+<!-- Add fancyBox -->
+<!-- <link rel="stylesheet" href="/fancybox/source/jquery.fancybox.css?v=2.1.7" type="text/css" media="screen" /> -->
+<!-- <script type="text/javascript" src="/fancybox/source/jquery.fancybox.pack.js?v=2.1.7"></script> -->
+
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<!-- <link rel="stylesheet" href="/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" /> -->
+<!-- <script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script> -->
+<!-- <script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script> -->
+
+<!-- <link rel="stylesheet" href="/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" /> -->
+<!-- <script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script> -->
+{{fancybox}}
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".fancybox").fancybox({
+        prevEffect      : 'none',
+        nextEffect      : 'none',
+        live: false,
+        helpers     : {
+            title   : { type : 'inside' },
+            buttons : {},
+            thumbs: {
+                width  : 40,
+                height : 40,
+            },
+        },
+        preload:10,
+    });
+    });
+</script>
+
+<script type="text/javascript" src="/js/fuckadblock.js"></script>
+<script type="text/javascript">
+function adBlockNotDetected() {
+    $('#ab').hide();
+}
+function adBlockDetected() {
+    $("#ab").show();
+    document.getElementById("ab").innerHTML = "<h2 style='color:red;'>Пожалуйста, отключите AdBlock или добавьте мой блог в исключения</h2><hr/>"
+}
+if(typeof fuckAdBlock === 'undefined') {
+    adBlockDetected();
+} else {
+    fuckAdBlock.onDetected(adBlockDetected);
+    fuckAdBlock.onNotDetected(adBlockNotDetected);
+}
+fuckAdBlock.setOption('checkOnLoad', true);
+fuckAdBlock.setOption({
+    debug: false,
+    checkOnLoad: true,
+    resetOnEnd: false
+});
 </script>
     </body>
     <!-- Theme: Elegant built for Pelican
